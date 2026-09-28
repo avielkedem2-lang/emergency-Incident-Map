@@ -1,6 +1,7 @@
 import express from "express"
 import "dotenv/config"
 import cors from "cors"
+import { connection } from "./db/mongoDB.js"
 
 const app = express()
 const PORT = process.env.PORT
@@ -18,6 +19,11 @@ function run(){
     app.listen(PORT, () => {
         console.log("The server is running...");
     })
+    try {
+        connection()
+    } catch (error) {
+        
+    }
 }
 
 
