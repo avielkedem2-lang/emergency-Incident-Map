@@ -1,5 +1,6 @@
 import express from "express"
 import { createUser, loginUser } from "../services/userService.js"
+import { checkRegister } from "../middleware/user.model.js"
 
 
 
@@ -10,7 +11,7 @@ const router = express.Router()
 
 
 
-router.post("/register", async (req, res) => {
+router.post("/register", checkRegister, async (req, res) => {
     try {
         const body = req.body
         const user = await createUser(body);
@@ -56,3 +57,7 @@ router.get("/me", async (req, res) => {
     }
 })
 
+
+
+
+export default router;
