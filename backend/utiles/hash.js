@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt"
-import "dotenv/config;";
 
 
 export async function passwordHash(password){
