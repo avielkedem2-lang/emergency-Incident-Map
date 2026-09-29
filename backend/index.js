@@ -16,14 +16,14 @@ app.use("/auth", routerUser)
 
 
 
-function run(){
-    app.listen(PORT, () => {
-        console.log("The server is running...");
-    })
+function run() {
     try {
         connection()
+        app.listen(PORT, () => {
+            console.log("The server is running...");
+        })
     } catch (error) {
-        
+
     }
 }
 
