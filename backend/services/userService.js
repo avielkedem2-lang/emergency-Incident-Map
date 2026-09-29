@@ -34,6 +34,7 @@ export async function loginUser(body) {
 export async function getUser(token) {
     const id = decodeToken(token).id;
     const user = await userDal.findUserById(id);
+    if (!user) throw createError(404, "The is not eexist");
     delete user.password
     return user
 }
