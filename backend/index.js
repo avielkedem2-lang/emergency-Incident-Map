@@ -3,6 +3,8 @@ import "dotenv/config"
 import cors from "cors"
 import { connection } from "./db/mongoDB.js"
 import routerUser from "./routes/userRoute.js"
+import router from "./routes/mapRoute.js"
+
 
 const app = express()
 const PORT = process.env.PORT
@@ -10,6 +12,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cors())
 app.use("/auth", routerUser)
+app.use("/incidents", router)
 
 
 

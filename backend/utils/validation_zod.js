@@ -14,3 +14,10 @@ export const validationIncidents = z.object({
     location: z.object({ lat: z.number(), lon: z.number() }),
     createdBy: z.string(),
 })
+
+
+
+
+
+
+export const validationCategory = z.enum(["fire", "flood", "accident", "medical", "other"])
