@@ -21,9 +21,9 @@ app.use("/incidents", router)
 
 
 
-function run() {
+async function run() {
     try {
-        connection()
+        await connection()
         app.listen(PORT, () => {
             console.log("The server is running...");
         })

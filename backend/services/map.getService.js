@@ -1,5 +1,5 @@
 import mapDal from "../DAL/map.dal.js"
-
+import { createError } from "../utils/createError.js"
 
 
 
@@ -16,7 +16,7 @@ export async function getCategory(category) {
 };
 
 
-export async function getIncident(id){
+export async function getIncident(id) {
     const incident = await mapDal.findById(id)
     if (!incident) throw createError(404, "The incident is not eexist");
     return incident

@@ -57,7 +57,7 @@ router.post("/", checkToken, checkIncidents, async (req, res) => {
 
 router.patch("/:id", checkToken, checkUpdateIncidents, async (req, res) => {
     try {
-        const id = req.params
+        const id = req.params.id
         const body = req.body
         const data = await updateIncident(id, body)
         res.status(200).json({ success: true, data })
@@ -75,9 +75,9 @@ router.patch("/:id", checkToken, checkUpdateIncidents, async (req, res) => {
 
 router.delete("/:id", checkToken, checkDeleteIncidents, async (req, res) => {
     try {
-        const id = req.params
+        const id = req.params.id
         const userId = req.userId
-        const data = await deleteIncident(id, body)
+        const data = await deleteIncident(id, userId)
         res.status(200).json({ success: true, data })
     } catch (err) {
         if (err.status) {

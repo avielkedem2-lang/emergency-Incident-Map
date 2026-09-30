@@ -15,6 +15,7 @@ export const checkCategory = (req, res, next) => {
 export const checkIncidents = (req, res, next) => {
     const body = req.body;
     const id = decodeToken(req.token).id
+    if (!body) return res.status(400).json({ success: false, message: "bad request" });
     req.body.createdBy = id
     if (validationIncidents.safeParse(body).success === true) return res.status(400).json({ success: false, message: "bad request" });
     next()
@@ -27,8 +28,9 @@ export const checkIncidents = (req, res, next) => {
 export const checkUpdateIncidents = (req, res, next) => {
     const body = req.body;
     const userId = decodeToken(req.token).id
+    if (!body) return res.status(400).json({ success: false, message: "bad request" });
     req.body.createdBy = userId
-    if (validationUpdateIncidents.safeParse(body).success === true) return res.status(400).json({ success: false, message: "bad request" });
+    if (validationUpdateIncidents.safeParse(body).success === false) return res.status(400).json({ success: false, message: "bad request" });
     const id = req.params.id;
     if (ObjectId.isValid(id)) return res.status(400).json({ success: false, message: "bad request ID is not good" });
     next()
@@ -43,6 +45,6 @@ export const checkDeleteIncidents = (req, res, next) => {
     const userId = decodeToken(req.token).id
     req.userId = userId
     const id = req.params.id;
-    if (ObjectId.isValid(id)) return res.status(400).json({ success: false, message: "bad request ID is not good" });
+    if (!ObjectId.isValid(id)) return res.status(400).json({ success: false, message: "bad request ID is not good" });
     next()
 }
