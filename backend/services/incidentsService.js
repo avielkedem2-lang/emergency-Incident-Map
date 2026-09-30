@@ -19,6 +19,8 @@ export async function createIncidents(body) {
 export async function updateIncident(id, body) {
     const user = await userDal.findUserById(body.createBy);
     if (!user) throw createError(409, "The user not exists");
+    const incident = mapDal.findById(id)
+    if (!incident) return createError(400, "The change must to be the user that did that")
     await mapDal.update(id, body)
     return { success: true }
 };

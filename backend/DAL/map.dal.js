@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import db from "../db/mongoDB.js";
 
 
@@ -12,7 +13,7 @@ async function findAll() {
 
 
 async function findById(id) {
-    return coll.findOne({ id })
+    return coll.findOne({ _id: new ObjectId(id) })
 }
 
 
@@ -22,13 +23,13 @@ async function insert(body) {
 
 
 async function update(id, body) {
-    return coll.updateOne({ id }, { $set: { ...body } })
+    return coll.updateOne({ _id: new ObjectId(id) }, { $set: { ...body } })
 }
 
 
 
 async function deleteFromMap(id) {
-    return coll.deleteOne({id})
+    return coll.deleteOne({_id: new ObjectId(id)})
 }
 
 
