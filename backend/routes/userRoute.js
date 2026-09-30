@@ -1,6 +1,6 @@
 import express from "express"
 import { createUser, getUser, loginUser } from "../services/userService.js"
-import { checkLogin, checkMe, checkRegister } from "../middleware/user.model.js"
+import { checkLogin, checkRegister, checkToken } from "../middleware/user.model.js"
 
 
 
@@ -47,7 +47,7 @@ router.post("/login", checkLogin, async (req, res) => {
 
 
 
-router.get("/me",checkMe, async (req, res) => {
+router.get("/me",checkToken, async (req, res) => {
     try {
         const token = req.token
         const data = await getUser(token);

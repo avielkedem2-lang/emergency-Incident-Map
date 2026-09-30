@@ -19,5 +19,16 @@ export const validationIncidents = z.object({
 
 
 
+export const validationUpdateIncidents = z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    category: z.enum(["fire", "flood", "accident", "medical", "other"]),
+    status: z.enum(["open", "in_progress", "closed"]),
+    location: z.object({ lat: z.number(), lon: z.number() }),
+    createdBy: z.string(),
+})
+
+
+
 
 export const validationCategory = z.enum(["fire", "flood", "accident", "medical", "other"])
