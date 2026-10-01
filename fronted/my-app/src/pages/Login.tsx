@@ -22,7 +22,9 @@ export default function Login() {
         e.preventDefault();
         login(user.current).then((data) => {
           if (data?.data) {
-            localStorage.setItem("token", data.data.data)
+            console.log(data.data.data.data);
+            
+            localStorage.setItem("token", data.data.data.data)
             return (navigate("/me"))
           } else {
             console.log(data?.message);
@@ -34,7 +36,7 @@ export default function Login() {
         })
       }}>
         <input type="email" placeholder="Enter your email" onChange={(e) => user.current = { ...user.current, email: e.target.value }} />
-        <input type="text" placeholder="**********" onChange={(e) => user.current = { ...user.current, password: e.target.value }} />
+        <input type="password" placeholder="**********" onChange={(e) => user.current = { ...user.current, password: e.target.value }} />
         <button type="submit">submit</button>
         <br />
         {isError && (

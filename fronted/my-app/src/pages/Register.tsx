@@ -31,7 +31,7 @@ export default function Register() {
         })
       }}>
         <input type="email" placeholder="Enter your email" onChange={(e) => user.current = { ...user.current, email: e.target.value }} />
-        <input type="text" placeholder="**********" onChange={(e) => user.current = { ...user.current, password: e.target.value }} />
+        <input type="password" placeholder="**********" onChange={(e) => user.current = { ...user.current, password: e.target.value }} />
         <button type="submit">submit</button>
         <br />
         {isError && (
