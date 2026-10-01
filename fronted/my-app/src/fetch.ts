@@ -54,3 +54,7 @@ export async function getUser(token:string) {
     const res = await sendRequestGet(url, token);
     return res
 }
+
+
+
+
