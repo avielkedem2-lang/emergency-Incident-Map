@@ -22,8 +22,6 @@ export default function CreateIncident({ create, location }: { create: string, l
 
   if (create !== "create") return null;
   const [incident, setIncident] = useState<Incident>({ title: '', description: '', category: "", location: { lat: 0, lon: 0 } })
-  console.log(incident);
-
   useEffect(() => {
     setIncident({ ...incident, location: location! })
   }, [location])
@@ -37,18 +35,21 @@ export default function CreateIncident({ create, location }: { create: string, l
         e.preventDefault();
         const token = localStorage.getItem("token")
         createIncident(incident, token!).then((data) => {
-          console.log(data?.message.message)
+          console.log(data);
+          
           if (data?.data) {
+            
+            
             setIsRes(true)
             res.current = data.data.data.success
-            console.log(res);
-            
           } else {
-            
+
             setIsRes(true);
             res.current = data?.message.message
-            if (data?.message.message === "The token is not good") return navigate("/login")
+            console.log(res.current);
             
+            if (data?.message.message === "The token is not good") return navigate("/login")
+
           }
         })
       }}>

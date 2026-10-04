@@ -58,3 +58,8 @@ export async function getUser(token:string) {
 
 
 
+export async function isToken(token: string) {
+    const url = "http://localhost:3000/auth/token";
+    const res = await sendRequestGet(url, token);
+    return res
+}

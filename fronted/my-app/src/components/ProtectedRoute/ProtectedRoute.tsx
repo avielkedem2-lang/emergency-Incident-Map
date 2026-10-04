@@ -1,4 +1,5 @@
-import { Navigate } from "react-router"
+import { Navigate, useNavigate } from "react-router"
+import { isToken } from "../../fetch";
 
 
 type ChildrenType = {
@@ -8,7 +9,13 @@ type ChildrenType = {
 
 export default function ProtectedRoute({ children }: ChildrenType) {
     const token = localStorage.getItem("token")
-    if (!token) return (<Navigate to={"/login"}/>)
+    if (!token) return (<Navigate to={"/login"} />);
+    const navigate = useNavigate()
+    isToken(token).then((data) => {
+        if (data?.message) {
+            return navigate("/login")
+        }
+    })
     return (
         <div>
             {children}
