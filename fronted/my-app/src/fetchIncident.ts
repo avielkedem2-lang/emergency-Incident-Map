@@ -8,7 +8,7 @@ import axios from "axios";
 
 async function sendRequestPost(url: string, body: object, token: string) {
     try {
-        const data = await axios.post(url, body, { headers: { token } });
+        const data = await axios.patch(url, body, { headers: { token } });
         return { data }
     } catch (err) {
         if (axios.isAxiosError(err)) {
