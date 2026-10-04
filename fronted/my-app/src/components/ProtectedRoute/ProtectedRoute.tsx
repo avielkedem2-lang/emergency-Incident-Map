@@ -9,8 +9,8 @@ type ChildrenType = {
 
 export default function ProtectedRoute({ children }: ChildrenType) {
     const token = localStorage.getItem("token")
-    if (!token) return (<Navigate to={"/login"} />);
     const navigate = useNavigate()
+    if (!token) return (<Navigate to={"/login"} />);
     isToken(token).then((data) => {
         if (data?.message) {
             return navigate("/login")

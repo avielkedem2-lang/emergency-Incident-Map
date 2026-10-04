@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createIncident } from "../../fetchIncident";
 import { useNavigate } from "react-router";
+import { incidentsCard } from "../../store/incidentsCard";
 
 
 
@@ -20,7 +21,7 @@ type Incident = {
 
 export default function CreateIncident({ create, location }: { create: string, location: Location | undefined }) {
 
-  if (create !== "create") return null;
+  
   const [incident, setIncident] = useState<Incident>({ title: '', description: '', category: "", location: { lat: 0, lon: 0 } })
   useEffect(() => {
     setIncident({ ...incident, location: location! })
@@ -28,20 +29,18 @@ export default function CreateIncident({ create, location }: { create: string, l
 
   const res = useRef('')
   const [isRes, setIsRes] = useState<boolean>(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const addIncident = incidentsCard(s => s.addIncident);
+  if (create !== "create") return null;
   return (
     <div>
       <form onSubmit={(e) => {
         e.preventDefault();
         const token = localStorage.getItem("token")
         createIncident(incident, token!).then((data) => {
-          console.log(data);
-          
-          if (data?.data) {
-            
-            
-            setIsRes(true)
-            res.current = data.data.data.success
+          console.log(data?.data?.data);
+          if (data?.data) {  
+            addIncident(data.data.data.data)
           } else {
 
             setIsRes(true);

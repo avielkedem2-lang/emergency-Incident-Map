@@ -22,8 +22,6 @@ export default function Register() {
           if (data?.data) {
             return (navigate("/login"))
           } else {
-            console.log(data?.message);
-            
             setIsError(true);
             setError(data?.message.message)
           }
