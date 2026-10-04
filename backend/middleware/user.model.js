@@ -6,6 +6,8 @@ import {passwordHash} from "../utils/hash.js"
 
 export const checkRegister = async (req, res, next) => {
     const body = req.body;
+    console.log(body);
+    
     if (validationRegisterAndLogin.safeParse(body).success === false) return res.status(400).json({ success: false, message: "bad request" });
     const password = await passwordHash(body.password);
     req.body.password = password

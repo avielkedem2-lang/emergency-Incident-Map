@@ -20,7 +20,8 @@ export async function updateIncident(id, body) {
     const user = await userDal.findUserById(body.createdBy);
     if (!user) throw createError(409, "The user not exists");
     const incident = await mapDal.findById(id)
-    if (!incident && incident.createdBy === body.createdBy) return createError(400, "The change must to be the user that did that")
+    if (!incident) throw createError(404, "The change must to be the user that did that");
+    if (incident.createdBy !== body.createdBy) throw createError(403, "Only the creator can change this incident")
     await mapDal.update(id, body)
     return { success: true }
 };
@@ -31,7 +32,8 @@ export async function deleteIncident(id, userId) {
     const user = await userDal.findUserById(userId);
     if (!user) throw createError(409, "The user not exists");
     const incident = await mapDal.findById(id)
-    if (!incident && incident.createdBy === userId) return createError(400, "The change must to be the user that did that")
+    if (!incident) throw createError(404, "The change must to be the user that did that");
+    if (incident.createdBy !== userId) throw createError(403, "Only the creator can change this incident")
     await mapDal.deleteFromMap(id)
     return { success: true }
 }

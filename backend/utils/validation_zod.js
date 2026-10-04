@@ -20,14 +20,13 @@ export const validationIncidents = z.object({
 
 
 export const validationUpdateIncidents = z.object({
-    title: z.string().min(1),
-    description: z.string().min(1),
-    category: z.enum(["fire", "flood", "accident", "medical", "other"]),
-    status: z.enum(["open", "in_progress", "closed"]),
-    location: z.object({ lat: z.number(), lon: z.number() }),
-    createdBy: z.string(),
+    title: z.string().min(1).optional(),
+    description: z.string().min(1).optional(),
+    category: z.enum(["fire", "flood", "accident", "medical", "other"]).optional(),
+    status: z.enum(["open", "in_progress", "closed"]).optional(),
+    location: z.object({ lat: z.number().min(-90).max(90), lon: z.number().min(-180).max(180) }).optional(),
+    createdBy: z.string().optional(),
 })
-
 
 
 

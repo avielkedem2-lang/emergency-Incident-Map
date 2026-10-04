@@ -62,5 +62,11 @@ router.get("/me",checkToken, async (req, res) => {
 
 
 
+router.get("/token", checkToken, (req, res) =>{
+    res.status(200).json({ success: true, data: "Token is good" })
+})
+
+
+
 
 export default router;

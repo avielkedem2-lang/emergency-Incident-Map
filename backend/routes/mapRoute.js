@@ -1,6 +1,6 @@
 import express from "express"
 import { checkCategory, checkIncidents, checkUpdateIncidents, checkDeleteIncidents } from "../middleware/map.model.js"
-import { getCategory, getIncident } from "../services/map.getService.js"
+import { getAllIncidents, getCategory, getIncident } from "../services/map.getService.js"
 import { checkToken } from "../middleware/user.model.js"
 import { updateIncident, deleteIncident ,createIncidents} from "../services/incidentsService.js"
 
@@ -11,6 +11,10 @@ const router = express.Router()
 
 router.get("/", checkToken, checkCategory, async (req, res) => {
     try {
+        if (Object.keys(req.query).length === 0){
+            const data = await getAllIncidents()
+            return res.status(200).json({ success: true, data })
+        }
         const { category } = req.query
         const data = await getCategory(category)
         res.status(200).json({ success: true, data })

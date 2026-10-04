@@ -4,6 +4,11 @@ import { createError } from "../utils/createError.js"
 
 
 
+export async function getAllIncidents() {
+    return await mapDal.findAll()
+}
+
+
 export async function getCategory(category) {
     const incidents = await mapDal.findAll()
     if (typeof category === "string") {
